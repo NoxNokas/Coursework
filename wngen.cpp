@@ -4,9 +4,8 @@
 
 #include "wngen.h"
 #include <math.h>
-//#include <cstdlib>
-#include <cstdlib>
-#include <ctime>
+#include <chrono>
+#include <random>
 #pragma package(smart_init)
 
 //---------------------------------------------------------------------------
@@ -42,34 +41,22 @@ void CWhiteNoiseGenerator::setW0( double p_dW0 )
 void CWhiteNoiseGenerator::Reset()
 {
     m_iIntervalCount = 0;
-    srand ( time(NULL) );     // инициализация функции rand значением функции time
-//    Randomize();
+    seed = std::chrono::system_clock::now().time_since_epoch().count();
 }
 
 //---------------------------------------------------------------------------
 
 double CWhiteNoiseGenerator::getValue( double p_dT )
 {
+    std::default_random_engine generator (seed);
+    std::normal_distribution<double> distribution (10.5,m_dSigma);
     static double ls_dRandomValue = 0;
     if ( (int)(p_dT / m_dDT) != m_iIntervalCount )
     {
-     //   ls_dRandomValue = RandG(0, m_dSigma);
-        ls_dRandomValue = gaussrand(10.5, m_dSigma);
+        ls_dRandomValue = distribution(generator);
         m_iIntervalCount = (int)(p_dT / m_dDT);
     }
     return ls_dRandomValue;
 }
 
 //---------------------------------------------------------------------------
-
-
-double CWhiteNoiseGenerator::gaussrand(double MO, double sko)
-{
-    float sum=0, x;
-
-    for (int i=0;i<25;i++)
-        sum+=1.0*rand()/RAND_MAX;
-    x = (sqrt(2.0)*(sko)*(sum-12.5))/1.99661 + MO;
-
-    return x;
-}
