@@ -37,7 +37,7 @@ TDataStorage& TDataStorage::setLength( int p_iLength )
     p_iLength = std::max(0, p_iLength);
     //->setLength( p_iLength );
     for(int i = 0; i <= p_iLength; i++){
-       QVector<QVector<long double>>::append(QVector<long double>(6, 0));
+       QVector<QVector<long double>>::append(QVector<long double>(5, 0));
        m_vTime.append(0.);
     }
     if ( p_iLength < m_iUsedCapacity )

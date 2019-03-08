@@ -2,8 +2,6 @@
 
 #pragma once
 
-
-
 // Подключение заголовочного файла библиотеки векторных и матричных операций
 //#include "array.h"
 #include "integrator.h"

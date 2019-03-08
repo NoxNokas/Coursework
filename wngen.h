@@ -9,15 +9,13 @@ class CWhiteNoiseGenerator
     protected:
         double m_dW0, m_dDT, m_dSigma;  // Параметры белого шума (частота среза системы, интервал корреляции, СКО случайного процесса)
         int m_iIntervalCount;           // количество пройденных интервалов корреляции от момента времени t = 0 (обеспечивает эволюцию СП)
-        unsigned seed;
+
     public:
         CWhiteNoiseGenerator( double p_dW0 = 1e5 );
         void Reset();
         void setW0( double p_dW0 );
         inline double getW0() const { return m_dW0; }
         inline double getDeltaT() const { return m_dDT; }
-        //Возвращает числа нормально распределённой случайной величины с заданными мат.ож и СКО
-     //   double  gaussrand(double MO, double sko);
         double getValue( double p_dT );
 };
 

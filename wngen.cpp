@@ -31,7 +31,7 @@ CWhiteNoiseGenerator::CWhiteNoiseGenerator( double p_dW0 )
 void CWhiteNoiseGenerator::setW0( double p_dW0 )
 {
     m_dW0 = max(1e-10,p_dW0);
-    m_dDT = 2 * M_PI / m_dW0;
+    m_dDT =2 * M_PI / m_dW0;
     m_dSigma = 1/sqrt(m_dDT);
     Reset();
 }
@@ -39,17 +39,17 @@ void CWhiteNoiseGenerator::setW0( double p_dW0 )
 //---------------------------------------------------------------------------
 
 void CWhiteNoiseGenerator::Reset()
-{
+{  
     m_iIntervalCount = 0;
-    seed = std::chrono::system_clock::now().time_since_epoch().count();
 }
 
 //---------------------------------------------------------------------------
 
 double CWhiteNoiseGenerator::getValue( double p_dT )
 {
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::default_random_engine generator (seed);
-    std::normal_distribution<double> distribution (10.5,m_dSigma);
+    std::normal_distribution<double> distribution (0,m_dSigma);
     static double ls_dRandomValue = 0;
     if ( (int)(p_dT / m_dDT) != m_iIntervalCount )
     {

@@ -8,7 +8,7 @@
 #define min(a, b) ( ( (a) < (b) ) ? (a) : (b) )
 
 TIntegrator::TIntegrator()
-    : m_ldEps( 1e-4 )
+    : m_ldEps( 1e-16 )
     , m_ldEpsGlobal( 0 )
     , m_pMathModel( NULL )
 {
