@@ -37,6 +37,7 @@ TEnzymaticModel::TEnzymaticModel()
     tau = 4.;
     lambda = 0.2;
     T = 5;
+    M = 10.5;
     D = 2.25;
     K = 4.7434164903;
     m_oWNGenerator.setW0(100);
@@ -47,7 +48,7 @@ TEnzymaticModel::TEnzymaticModel()
     X0[1] = 0.;
     X0[2] = 0.;
     X0[3] = 20.;
-    X0[4] = 0.;
+    X0[4] = 0;
 
 }
 
@@ -56,8 +57,8 @@ TEnzymaticModel::TEnzymaticModel()
 void TEnzymaticModel::getRight( const QVector<long double>& X, long double t, QVector<long double>& Y )
 {
     Y.resize(5);
-    z = 1 / (1 + (0.0005 * pow(m_oLagBuffer.getDataByTime(t-tau)[3], 3)));
-    Y[0] = X[4] - z * X[0];
+    z = 1 / pow(1 + 0.0005 * m_oLagBuffer.getDataByTime(t-tau)[3], 3);
+    Y[0] = M + X[4] - z * X[0];
     Y[1] = z * X[0] - X[1] ;
     Y[2] = X[1] - X[2];
     Y[3] = X[2] - 0.5 * X[3];
@@ -65,4 +66,3 @@ void TEnzymaticModel::getRight( const QVector<long double>& X, long double t, QV
 }
 
 //---------------------------------------------------------------------------
-

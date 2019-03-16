@@ -26,7 +26,7 @@ class TArenstorfModel  : public TLagModel
 class TEnzymaticModel : public TLagModel
 {
     protected:
-        long double z, tau, K, T, D, lambda;
+        long double z, tau, K, T, M, D, lambda;
 
         CWhiteNoiseGenerator m_oWNGenerator;
     public:

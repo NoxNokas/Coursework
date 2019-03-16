@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QVector>
+#include <QFile>
+#include <QTextStream>
 #include "integrator.h"
 #include "custom.h"
 namespace Ui {
@@ -20,6 +22,7 @@ public:
 private slots:
     void on_pushButton_clicked();
     void showResult(TEnzymaticModel* model);
+    void statCharacteristics();
 
 
 private:
